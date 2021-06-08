@@ -1,4 +1,4 @@
-pub const EMOJIS: &[(&str, &str)] = &[
+pub static EMOJIS: &[(&str, &str)] = &[
     ("grinning", "😀"),
     ("grimacing", "😬"),
     ("grin", "😁"),

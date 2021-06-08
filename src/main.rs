@@ -83,7 +83,6 @@ impl EmojiList {
         let pointer = p.load(Ordering::SeqCst);
         if !pointer.is_null() {
             let length = l.load(Ordering::SeqCst);
-            let pointer = p.load(Ordering::SeqCst);
             unsafe { ptr::drop_in_place(ptr::slice_from_raw_parts_mut(pointer, length)) };
         }
         l.store(len, Ordering::SeqCst);
@@ -169,7 +168,7 @@ impl Widget<EmojiStuff> for EmojiPane {
         data: &EmojiStuff,
         env: &Env,
     ) {
-        self.list.update(ctx, &old_data, data, env)
+        self.list.update(ctx, old_data, data, env)
     }
 
     fn layout(
@@ -183,7 +182,7 @@ impl Widget<EmojiStuff> for EmojiPane {
     }
 
     fn paint(&mut self, ctx: &mut druid::PaintCtx, data: &EmojiStuff, env: &Env) {
-        self.list.paint(ctx, &data, env);
+        self.list.paint(ctx, data, env);
     }
 }
 
@@ -289,8 +288,8 @@ fn main() {
     let main_window = WindowDesc::new(ui_builder())
         .window_size((298.0, 324.0))
         .title(LocalizedString::new("emoji-picker").with_placeholder("Emoji Picker"));
-    let data = EmojiStuff { search: "".into(), emojis: EmojiList::new(mojis::EMOJIS) };
 
+    let data = EmojiStuff { search: "".into(), emojis: EmojiList::new(mojis::EMOJIS) };
     AppLauncher::with_window(main_window)
         .delegate(EmojiCopy)
         .launch(data)
