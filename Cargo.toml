@@ -1,0 +1,15 @@
+[package]
+name = "emojay"
+version = "0.1.0"
+authors = ["Devin R <devin.ragotzy@gmail.com>"]
+license = "MIT/Apache-2.0"
+description = "Emoji picker"
+repository = "https://github.com/DevinR528/emojay"
+keywords = ["emoji", "picker"]
+readme = "readme.md"
+edition = "2018"
+
+
+[dependencies]
+druid = { git = "https://github.com/linebender/druid.git", features = ["im"] }
+fuzzy-matcher = "0.3.7"
